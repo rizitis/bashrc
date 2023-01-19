@@ -15,21 +15,11 @@ shopt -s checkwinsize
 shopt -s histappend
 PROMPT_COMMAND='history -a'
 
-# Custom prompt
-#PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]$\033[00m\] '
-#PS1='\[\033[01;31m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[01;34m\]#\033[00m\] '
-export col_white='\033[00m'
-export col_black='\033[01;30m'
-
-export col_red='\033[01;31m'
-export col_green='\033[01;32m'
-export col_yel='\033[01;33m'
-export col_blue='\033[01;34m'
-
-if [ "$LOGNAME" = root ] || [ "`id -u`" -eq 0 ] ; then
-    PS1="$col_red\u@\h:$col_purple\w$col_green# $col_white"
-else
-    PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]$\033[00m\] '
+# If id command returns zero, you've root access.
+if [ $(id -u) -eq 0 ];then # you are root, set red colour prompt
+PS1="\\[$(tput setaf 1)\\]\\u@#~>  \\[$(tput sgr0)\\] "
+else # normal
+PS1="\\[$(tput setaf 3)\\]\\u@$~>  \\[$(tput sgr0)\\] "
 fi
 
 # Add color
@@ -63,15 +53,6 @@ export LS_COLORS='no=00:fi=00:di=00;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40
 #export GREP_OPTIONS='--color=auto' #deprecated
 alias grep="/usr/bin/grep $GREP_OPTIONS"
 unset GREP_OPTIONS
-
-# Color for manpages in less makes manpages a little easier to read
-export LESS_TERMCAP_mb=$'\E[01;31m'
-export LESS_TERMCAP_md=$'\E[01;31m'
-export LESS_TERMCAP_me=$'\E[0m'
-export LESS_TERMCAP_se=$'\E[0m'
-export LESS_TERMCAP_so=$'\E[01;44;33m'
-export LESS_TERMCAP_ue=$'\E[0m'
-export LESS_TERMCAP_us=$'\E[01;32m'
 
 # Easy way to extract archives
 ksezip () {
