@@ -1,35 +1,47 @@
 . /etc/profile
 # history modifications
-export HISTSIZE=1000 #500 is default
-export HISTFILESIZE=1000000
-export HISTTIMEFORMAT='%b %d %I:%M %p ' # using strftime format
-export HISTCONTROL=ignoreboth # ignoreups:ignorespace
+#export HISTSIZE=1000 #500 is default
+#export HISTFILESIZE=1000000
+#export HISTTIMEFORMAT='%b %d %I:%M %p ' # using strftime format
+#export HISTCONTROL=ignoreboth # ignoreups:ignorespace
 #I like nano
 export EDITOR=nano
 export VISUAL=nano 
 # Dynamic resizing
 shopt -s checkwinsize
+#export PROMPT_COMMAND="resize &>/dev/null ; $PROMPT_COMMAND"
+#trap 'check_terminal_size' WINCH
 #
 #save bash history so as to share
 
-shopt -s histappend
-PROMPT_COMMAND='history -a'
+#shopt -s histappend
+#PROMPT_COMMAND='history -a'
 
-# If id command returns zero, you've root access.
-if [ $(id -u) -eq 0 ];then # you are root, set red colour prompt
-PS1="\\[$(tput setaf 1)\\]\\u@#~>  \\[$(tput sgr0)\\] "
-else # normal
-PS1="\\[$(tput setaf 3)\\]\\u@$~>  \\[$(tput sgr0)\\] "
-fi
+# Custom prompt
+#
+#
+export col_white='\033[00m'
+export col_black='\033[01;30m'
+
+export col_red='\033[01;31m'
+export col_green='\033[01;32m'
+export col_yel='\033[01;33m'
+export col_blue='\033[01;34m'
+#export PS1='$(whoami):${PWD/*\//}#'. 
+#if [ "$LOGNAME" = root ] || [ "`id -u`" -eq 0 ] ; then
+#    PS1="$col_red\u@\h:$col_purple\w$col_green# $col_white"
+#fi
 
 # Add color
-eval `dircolors -b`
+#eval `dircolors -b`
 
 
 
 #aliases make life better
-alias  grub-mk='grub-mkconfig -o /boot/grub/grub.cfg'
-alias  grub-i='grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=grub'
+alias intel='sudo intel_gpu_top'
+alias p-kg='ifin.sh'
+alias  grub-mk='sudo grub-mkconfig -o /boot/grub/grub.cfg'
+alias  grub-i='sudo grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=grub'
 alias edit='gnome-text-editor'
 alias ..='cd ..'
 alias ...='cd../..'
@@ -49,10 +61,19 @@ alias sbopkg='sudo sbopkg'
 alias slpkg='sudo slpkg'
 # To have colors for ls and all grep commands such as grep, egrep and zgrep
 export CLICOLOR=1
-export LS_COLORS='no=00:fi=00:di=00;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.gz=01;31:*.bz2=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.avi=01;35:*.fli=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.ogg=01;35:*.mp3=01;35:*.wav=01;35:*.xml=00;31:'
+#export #LS_COLORS='no=00:fi=00:di=00;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.gz=01;31:*.bz2=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.avi=01;35:*.fli=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.ogg=01;35:*.mp3=01;35:*.wav=01;35:*.xml=00;31:'
 #export GREP_OPTIONS='--color=auto' #deprecated
 alias grep="/usr/bin/grep $GREP_OPTIONS"
 unset GREP_OPTIONS
+
+# Color for manpages in less makes manpages a little easier to read
+export LESS_TERMCAP_mb=$'\E[01;31m'
+export LESS_TERMCAP_md=$'\E[01;31m'
+export LESS_TERMCAP_me=$'\E[0m'
+export LESS_TERMCAP_se=$'\E[0m'
+export LESS_TERMCAP_so=$'\E[01;44;33m'
+export LESS_TERMCAP_ue=$'\E[0m'
+export LESS_TERMCAP_us=$'\E[01;32m'
 
 # Easy way to extract archives
 ksezip () {
@@ -60,6 +81,7 @@ ksezip () {
        case $1 in
            *.tar.bz2)   tar xvjf $1;;
            *.tar.gz)    tar xvzf $1;;
+           *.tar.xz)    tar xvzf $1;;
            *.bz2)       bunzip2 $1 ;;
            *.rar)       unrar x $1 ;;
            *.gz)        gunzip $1  ;;
@@ -78,7 +100,7 @@ ksezip () {
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
-display=( z y a b c d e f g h i j k l m n )
+#display=( z y a b c d e f g h i j k l m n )
 
 c0="\033[0m" # Reset Text
 bold="\033[1m" # Bold Text
@@ -231,3 +253,4 @@ infoDisplay
 echo
 
 
+export TERM=xterm-256color
