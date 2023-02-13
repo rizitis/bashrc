@@ -36,8 +36,11 @@ export col_blue='\033[01;34m'
 #eval `dircolors -b`
 
 
-
+install(){
+    sudo slpkg -i $1 -fp='*'
+}
 #aliases make life better
+alias sl-i='sudo slpkg -i'
 alias intel='sudo intel_gpu_top'
 alias p-kg='ifin.sh'
 alias  grub-mk='sudo grub-mkconfig -o /boot/grub/grub.cfg'
