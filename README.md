@@ -1,2 +1,2 @@
 # bashrc
-MY ~/.bashrc profile
+MY ~/.bashrc profile backup
