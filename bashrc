@@ -35,11 +35,14 @@ export col_blue='\033[01;34m'
 # Add color
 #eval `dircolors -b`
 
-
+# slpkg -i...
 install(){
     sudo slpkg -i $1 -fp='*'
 }
+
 #aliases make life better
+alias stremio='/opt/stremio-shell/build/stremio &'
+alias live='cd /home/omen/Music/gr-radio_tv-main/gr-radio_tv ; sh -c ./gr-radio_tv'
 alias sl-i='sudo slpkg -i'
 alias intel='sudo intel_gpu_top'
 alias p-kg='ifin.sh'
