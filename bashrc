@@ -7,7 +7,7 @@
 #export HISTCONTROL=ignoreboth # ignoreups:ignorespace
 #I like nano
 export EDITOR=nano
-export VISUAL=nano 
+export VISUAL=nano 
 # Dynamic resizing
 shopt -s checkwinsize
 #export PROMPT_COMMAND="resize &>/dev/null ; $PROMPT_COMMAND"
