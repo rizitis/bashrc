@@ -1,4 +1,5 @@
 . /etc/profile
+. ~/.config/mimeapps.list
 # history modifications
 #export HISTSIZE=1000 #500 is default
 #export HISTFILESIZE=1000000
@@ -36,13 +37,16 @@ export col_blue='\033[01;34m'
 #eval `dircolors -b`
 
 # slpkg -i...
-install(){
-    sudo slpkg -i $1 -fp='*'
-}
-
+#install(){
+#    sudo slpkg -i $1 -fp='*'
+#}
+#install () {
+#sudo slpkg -i /var/lib/sbopkg/queues/$1.sqf
+#}
 #aliases make life better
+alias tv='vlc /home/omen/Music/gr-radio_tv-main/gr-radio_tv/gr.m3u'
 alias stremio='/opt/stremio-shell/build/stremio &'
-alias live='cd /home/omen/Music/gr-radio_tv-main/gr-radio_tv ; sh -c ./gr-radio_tv'
+alias live='cd /home/omen/Music/gr-radio_tv-main/gr-radio_tv ; sh -c ./gr-radio_tv '
 alias sl-i='sudo slpkg -i'
 alias intel='sudo intel_gpu_top'
 alias p-kg='ifin.sh'
@@ -146,11 +150,8 @@ asciiText () {
 "$c4░ ░▒  ░ ░░ ░ ▒  ░ ▒   ▒▒ ░  ░  ▒   ░ ░▒ ▒░  ▒ ░ ░    ▒   ▒▒ ░  ░▒ ░ ▒░ ░ ░  ░ %s"
 "$c4░ ░  ░    ░ ░    ░   ▒   ░        ░ ░░ ░   ░   ░    ░   ▒     ░░   ░    ░    %s"
 "$c4  ░      ░  ░     ░  ░░ ░      ░  ░       ░          ░  ░   ░        ░  ░ %s"
-"$c4                         ░   %s"  "$c4                                        %s"                                                     
-"$c4                               %s"  "$c4                                      %s"
-"$c4                              %s"  "$c4                                       %s"
-"$c4                                 %s"  "$c4                                    %s"
-"$c4                                 %s"  "$c4                                   %s")
+"$c4                         ░   %s"  "$c4                                        
+"$c4                             %s""$c4                                           %s)
 for ((i=0; i<${#fulloutput[*]}; i++)); do
         printf "${fulloutput[i]}$c0\n" "${out_array}"
         if [[ "$i" -ge "$startline" ]]; then
@@ -260,3 +261,5 @@ echo
 
 
 export TERM=xterm-256color
+export GOPATH=$HOME/go
+export GOPATH="$HOME:/usr/share/gocode"
