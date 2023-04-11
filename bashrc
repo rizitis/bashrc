@@ -1,5 +1,5 @@
 . /etc/profile
-. ~/.config/mimeapps.list
+#. ~/.config/mimeapps.list
 # history modifications
 #export HISTSIZE=1000 #500 is default
 #export HISTFILESIZE=1000000
@@ -7,7 +7,7 @@
 #export HISTCONTROL=ignoreboth # ignoreups:ignorespace
 #I like nano
 export EDITOR=nano
-export VISUAL=nano 
+export VISUAL=nano 
 # Dynamic resizing
 shopt -s checkwinsize
 #export PROMPT_COMMAND="resize &>/dev/null ; $PROMPT_COMMAND"
@@ -47,7 +47,7 @@ export col_blue='\033[01;34m'
 alias tv='vlc /home/omen/Music/gr-radio_tv-main/gr-radio_tv/gr.m3u'
 alias stremio='/opt/stremio-shell/build/stremio &'
 alias live='cd /home/omen/Music/gr-radio_tv-main/gr-radio_tv ; sh -c ./gr-radio_tv '
-alias sl-i='sudo slpkg -i'
+alias slpkgbin='sudo slpkg update --bin-repo='*' '
 alias intel='sudo intel_gpu_top'
 alias p-kg='ifin.sh'
 alias  grub-mk='sudo grub-mkconfig -o /boot/grub/grub.cfg'
