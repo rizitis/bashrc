@@ -1,5 +1,7 @@
 #!/bin/bash
 . /etc/profile
+export GOPATH="$HOME:/usr/share/gocode"
+#.  ~/.local/share/applications/org.gnome.Nautilus.desktop
 iatest=$(expr index "$-" i)
 trap 'echo -ne "\033]2;$(history 1 | sed "s/^[ ]*[0-9]*[ ]*//g")\007"' DEBUG
 #######################################################
@@ -73,7 +75,7 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 # alias SERVERNAME='ssh YOURWEBSITE.com -l USERNAME -p PORTNUMBERHERE'
 
 # Alias's to change the directory
-alias web='cd /var/www/html'
+#alias web='cd /var/www/html'
 
 # Alias's to mount ISO files
 # mount -o loop /home/NAMEOFISO.iso /home/ISOMOUNTDIR/
@@ -90,6 +92,8 @@ alias web='cd /var/www/html'
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
+# slapt-src
+alias  slap='sudo slapt-src'
 
 # Show help for this .bashrc file
 alias hlp='less ~/.bashrc_help'
@@ -97,6 +101,9 @@ alias hlp='less ~/.bashrc_help'
 # alias to show the date
 alias da='date "+%Y-%m-%d %A %T %Z"'
 
+alias idle='idle3'
+alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
+alias grub-mkconfig='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 # Alias's to modified commands
 #alias cp='cp -i'
 #alias mv='mv -i'
